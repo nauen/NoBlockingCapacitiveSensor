@@ -16,7 +16,7 @@ Maybe the sketch is able to run on ESP32 if it's possible to attach an interrupt
 Hints for ESP8266:
 
 I was not able to make it run on ESP12 / ESP8266. 
-It was only possible to attach an interrupt to PIN 2, otherwise the ESP is rebooting in a loop. But no Signal was received with interrupt on PIN 2.
+It was not able to get Values on Interrupt PIN. Maybe here are some hints: https://blog.hiebl.cc/posts/wemos-d1-mini-pro-digital-interrupt-pins/
 
 ```
 /*
@@ -42,7 +42,7 @@ It was only possible to attach an interrupt to PIN 2, otherwise the ESP is reboo
 // geht CapacitiveSensor   cs_4_2 = CapacitiveSensor(15,0);             // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 // geht nicht CapacitiveSensor   cs_4_2 = CapacitiveSensor(15,14);      // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 // geht nicht CapacitiveSensor   cs_4_2 = CapacitiveSensor(15,12);      // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
-// geht nicht CapacitiveSensor   cs_4_2 = CapacitiveSensor(15,13);      // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
+// geht       CapacitiveSensor   cs_4_2 = CapacitiveSensor(15,13);      // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 // gehtt nicht CapacitiveSensor   cs_4_2 = CapacitiveSensor(4,15);      // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 // geht nicht CapacitiveSensor   cs_4_2 = CapacitiveSensor(15,1);       // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 // geht nicht CapacitiveSensor   cs_4_2 = CapacitiveSensor(2,15);       // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
