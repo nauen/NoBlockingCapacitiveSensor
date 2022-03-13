@@ -16,7 +16,8 @@ Maybe the sketch is able to run on ESP32 if it's possible to attach an interrupt
 Hints for ESP8266:
 
 I was not able to make it run on ESP12 / ESP8266. 
-It was not able to get values on Interrupt PIN. Maybe here are some hints: https://blog.hiebl.cc/posts/wemos-d1-mini-pro-digital-interrupt-pins/
+I was not able to get values on Interrupt PIN. Maybe here are some hints: https://blog.hiebl.cc/posts/wemos-d1-mini-pro-digital-interrupt-pins/
+Looks like there is no capacitator which get charged.
 
 ```
 /*
