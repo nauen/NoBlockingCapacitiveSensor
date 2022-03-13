@@ -9,6 +9,8 @@ https://github.com/nhatuan84/Arduino-KalmanFilter
 
 This sketch is tested on Teensy 4.0. It has a nice range until 1m with 30MOhm. The graph is a bit unpredictable and the spikes very sharp. Didn't find a perfect filter yet.
 
+Could run on Arduino.
+
 Maybe the sketch is able to run on ESP32 if it's possible to attach an interrupt. Not tryed yet.
 
 Hints for ESP8266:
