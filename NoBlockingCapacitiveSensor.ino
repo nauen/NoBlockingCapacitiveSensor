@@ -1,7 +1,9 @@
 #include "CapacitiveSensor.h"
 #include "ArduiKalman.h"
 
-CapacitiveSensor   cs_4_2 = CapacitiveSensor(2, 3);       // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
+CapacitiveSensor   cs_4_2 = CapacitiveSensor(2, 3);       // Teensy
+//CapacitiveSensor   cs_4_2 = CapacitiveSensor(5, 2);       // Arduino Nano without attaching the resistors to PIN 5 (D5)!!! I don't know why, but it's working then.
+
 float touchValue;
 float touchValueTime;
 byte cycles = 0;
@@ -15,9 +17,6 @@ int softer[100];
 int softIndex = 0;
 int soft = 0;
 
-int touches[1000];
-int touchIndex = 0;
-int touche = 0;
 void interruptReceive() {
   interruptsCounter++;
   cs_4_2.total += micros() - cs_4_2.totalTimer;
@@ -41,12 +40,6 @@ void interruptReceive() {
       soft += softer[i];
     }
 
-    if (touchIndex > 9) touchIndex = 0;
-    touches[touchIndex] = touchValue;
-    touche = 0;
-    for (int i = 0; i < 10; i++) {
-      touche += touches[i];
-    }
   }
 
 }
@@ -88,31 +81,34 @@ void setup() {
   P[0][0] = 1.0f;
 
   xc[0] = 40;
-
-  attachInterrupt(digitalPinToInterrupt(3), interruptReceive, RISING);
+  attachInterrupt(digitalPinToInterrupt(3), interruptReceive, RISING); // Teensy
+  //attachInterrupt(digitalPinToInterrupt(2), interruptReceive, RISING); // Arduino
+  
 }
 
 int touchCycles = 50;
-
+long timer = 0;
 bool touchDebug = true;
 void loop() {
-  if (touchDebug)
-    Serial.println(kalmanFilter(touchValueTime));
-
-  touchValueTime = interruptsCounter - interruptCounterOld;
-  interruptCounterOld = interruptsCounter;
-  //fscale(20000, 6200000, 0, 1024 , touchValue, 0)
-  //Serial.println((touchValueTime));
-  //Serial.println(soft);
-  /*
-      Serial.print(0);
-      Serial.print("\t");                    // tab character for debug windown spacing
-      Serial.print(7000);
-      Serial.print("\t");                    // tab character for debug windown spacing
-  */
-  if (cs_4_2.cycle <= 0) {
-    cs_4_2.cycle = touchCycles;
-    cs_4_2.capacitiveSensorNoBlock();
+    if (millis() - timer > 50) {
+    if (touchDebug){
+       Serial.println(kalmanFilter(touchValueTime));
+    }
+    touchValueTime = interruptsCounter - interruptCounterOld;
+    interruptCounterOld = interruptsCounter;
+    //fscale(20000, 6200000, 0, 1024 , touchValue, 0)
+    //Serial.println((touchValueTime));
+    //Serial.println(soft);
+    /*
+        Serial.print(0);
+        Serial.print("\t");                    // tab character for debug windown spacing
+        Serial.print(7000);
+        Serial.print("\t");                    // tab character for debug windown spacing
+    */
+    if (cs_4_2.cycle <= 0) {
+      cs_4_2.cycle = touchCycles;
+      cs_4_2.capacitiveSensorNoBlock();
+    }
+    timer = millis();
   }
-
 }
