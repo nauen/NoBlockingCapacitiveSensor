@@ -7,9 +7,9 @@ https://github.com/PaulStoffregen/CapacitiveSensor
 I added also from nhatuan84 Arduino-KalmanFilter 
 https://github.com/nhatuan84/Arduino-KalmanFilter
 
-This sketch is tested on Teensy 4.0. It has a nice range until 1m with 30MOhm. The graph is a bit unpredictable and the spikes very sharp. Didn't find a perfect filter yet.
+This sketch is tested on Teensy 4.0 and Arduino Nano. It has a nice range until 1m with 30MOhm. The graph is a bit unpredictable and the spikes very sharp. Didn't find a perfect filter yet.
 
-Could run on Arduino.
+On Arduino Nano, the sender PIN D5 will not be used. I don't know why it's working, but it's working.
 
 Maybe the sketch is able to run on ESP32 if it's possible to attach an interrupt. Not tryed yet.
 
